@@ -46,6 +46,10 @@
 	movement_delay = 0.5
 	has_coldbreath = TRUE
 	var/can_be_dug = TRUE
+	var/has_light = TRUE
+
+/turf/simulated/floor/trench/lightless
+	has_light = FALSE
 
 /turf/simulated/floor/trench/fake
 	atom_flags = null
@@ -59,7 +63,7 @@
 
 /turf/simulated/floor/trench/New()
 	..()
-	if(!locate(/obj/effect/lighting_dummy/daylight) in src)
+	if((!locate(/obj/effect/lighting_dummy/daylight) in src) && has_light)
 		new /obj/effect/lighting_dummy/daylight(src)
 	dir = pick(GLOB.alldirs)
 	update_icon()
